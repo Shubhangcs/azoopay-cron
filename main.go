@@ -19,6 +19,7 @@ import (
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 // ---------------------------------------------------------------------------
@@ -59,11 +60,11 @@ func loadConfig() (*config, error) {
 	// Fail loudly at startup instead of silently POSTing to an empty URL.
 	missing := make([]string, 0, 5)
 	for name, value := range map[string]string{
-		"DATABASE_URL":        cfg.DatabaseURL,
-		"BOOMPAY_TOKEN_URL":   cfg.TokenURL,
-		"BOOMPAY_CLIENT_ID":   cfg.ClientID,
-		"BOOMPAY_API_TOKEN":   cfg.APIToken,
-		"BOOMPAY_API_SECRET":  cfg.APISecret,
+		"DATABASE_URL":       cfg.DatabaseURL,
+		"BOOMPAY_TOKEN_URL":  cfg.TokenURL,
+		"BOOMPAY_CLIENT_ID":  cfg.ClientID,
+		"BOOMPAY_API_TOKEN":  cfg.APIToken,
+		"BOOMPAY_API_SECRET": cfg.APISecret,
 	} {
 		if strings.TrimSpace(value) == "" {
 			missing = append(missing, name)
